@@ -1,4 +1,5 @@
 class Genre < ActiveRecord::Base
   # add associations
-  belongs_to :song
+  
+  has_many :songs
 end
