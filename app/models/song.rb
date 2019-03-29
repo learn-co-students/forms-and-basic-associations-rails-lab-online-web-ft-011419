@@ -24,13 +24,23 @@ class Song < ActiveRecord::Base
  
  
  
- # def note_contents=(content)
- # self.note = Notes.find_or_create_by(content: content)
- # end
- # def  note_contents
-  #  self.note ? self.note.content : nil
+  #def note_contents=(content)
+  #self.note = Note.find_or_create_by(content: content)
+  #end
+  #def  note_contents
+   # self.note ? self.note.content : nil
   #end 
+def note_contents=(notes)
+    notes.each do |note|
+      if !note.empty?
+        self.notes.build(content: note)
+      end
+    end
+  end
 
+  def note_contents
+    self.notes.map {|n| n.content}
+  end
 
 
 
