@@ -1,8 +1,9 @@
 class Song < ActiveRecord::Base
   # add associations here
+   has_many :notes
   belongs_to  :artist
   belongs_to  :genre
-  has_many :notes
+ 
   def genre_ids=(ids)
      ids.each do |id|
       genre = Genre.find(id)
@@ -31,12 +32,14 @@ class Song < ActiveRecord::Base
    # self.note ? self.note.content : nil
   #end 
 def note_contents=(notes)
+  #binding.pry
     notes.each do |note|
-      if !note.empty?
+      #binding.pry
+      if note.strip != ''
         self.notes.build(content: note)
       end
-    end
-  end
+   end
+end
 
   def note_contents
     self.notes.map {|n| n.content}
